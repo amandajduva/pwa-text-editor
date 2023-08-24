@@ -19,7 +19,8 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-
+        template: './index.html',
+        title: 'JATE'
       }),
       new WebpackPwaManifest({
 
@@ -32,8 +33,19 @@ module.exports = () => {
     module: {
       rules: [
         {
-          
-        }
+          test: /\.css$/i,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        },
       ],
     },
   };
